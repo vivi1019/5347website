@@ -20,10 +20,12 @@ const EditCharacter = () => {
         wealth: 0
     });
 
+    const [selectedFields, setSelectedFields] = useState([]);
+
     useEffect(() => {
         console.log('Router query ID:', id); // Debug log to confirm id
         if (id) {
-            const url = `/api/characters/${id}`;
+            const url = `http://localhost:5001/api/characters/${id}`;
             console.log('Fetching character data from:', url); // Debug log to confirm URL
             axios.get(url)
                 .then(response => {
@@ -54,23 +56,59 @@ const EditCharacter = () => {
         }
     };
 
+    const handleFieldSelect = (field) => {
+        if (selectedFields.includes(field)) {
+            setSelectedFields(selectedFields.filter(f => f !== field));
+        } else {
+            setSelectedFields([...selectedFields, field]);
+        }
+    };
+
+    const fields = [
+        'name', 'subtitle', 'description', 'image_url', 'strength',
+        'speed', 'skill', 'fear_factor', 'power', 'intelligence', 'wealth'
+    ];
+
     return (
-        <div style={{ backgroundImage: 'url(/images/background.jpg)', backgroundSize: 'cover', height: '100vh' }}>
-            <h1>Edit Character</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
-                <input type="text" name="subtitle" placeholder="Subtitle" value={formData.subtitle} onChange={handleChange} required />
-                <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} required />
-                <input type="text" name="image_url" placeholder="Image URL" value={formData.image_url} onChange={handleChange} required />
-                <input type="number" name="strength" placeholder="Strength" value={formData.strength} onChange={handleChange} required />
-                <input type="number" name="speed" placeholder="Speed" value={formData.speed} onChange={handleChange} required />
-                <input type="number" name="skill" placeholder="Skill" value={formData.skill} onChange={handleChange} required />
-                <input type="number" name="fear_factor" placeholder="Fear Factor" value={formData.fear_factor} onChange={handleChange} required />
-                <input type="number" name="power" placeholder="Power" value={formData.power} onChange={handleChange} required />
-                <input type="number" name="intelligence" placeholder="Intelligence" value={formData.intelligence} onChange={handleChange} required />
-                <input type="number" name="wealth" placeholder="Wealth" value={formData.wealth} onChange={handleChange} required />
-                <button type="submit">Edit Character</button>
-            </form>
+        <div style={{ backgroundImage: 'url(/images/background.jpg)', backgroundSize: 'cover', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ background: 'rgba(255, 255, 255, 0.8)', padding: '20px', borderRadius: '10px' }}>
+                <h1>Edit Character</h1>
+                <form onSubmit={handleSubmit}>
+                    {fields.map(field => (
+                        <div key={field}>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    onChange={() => handleFieldSelect(field)}
+                                /> {field}
+                            </label>
+                            {selectedFields.includes(field) && (
+                                <>
+                                    {field !== 'description' ? (
+                                        <input
+                                            type={field === 'image_url' ? 'text' : 'number'}
+                                            name={field}
+                                            placeholder={field}
+                                            value={formData[field] || ''}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    ) : (
+                                        <textarea
+                                            name={field}
+                                            placeholder={field}
+                                            value={formData[field] || ''}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    ))}
+                    <button type="submit">Edit Character</button>
+                </form>
+            </div>
         </div>
     );
 };

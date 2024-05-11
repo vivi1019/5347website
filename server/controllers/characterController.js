@@ -127,7 +127,17 @@ exports.editCharacter = async (req, res) => {
 };
 
 
-// 获取角色信息
+// 获取所有角色
+exports.getAllCharacters = async (req, res) => {
+    try {
+        const characters = await Character.find();
+        res.status(200).json(characters);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// 获取单个角色信息
 exports.getCharacterById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -140,3 +150,4 @@ exports.getCharacterById = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
