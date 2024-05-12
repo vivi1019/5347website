@@ -1,0 +1,44 @@
+.userprofile_background {
+    background-image: url('../assets/background.jpg');
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px) contrast(0.2) brightness(1.7);
+    z-index: -1;
+}
+
+.userprofile_header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    line-height: 100px;  /* 确保文字垂直居中 */
+    height: 100px;
+    width: 100%;  /* 确保横向拉伸 */
+    margin: 0;  /* 移除任何外边距 */
+}
+
+.userprofile_table {
+    width: 100%; /* 表格宽度占满容器宽度 */
+    border-collapse: collapse; /* 边框合并为单一边框 */
+}
+
+.userprofile_left-column {
+    width: 20%; /* 左侧列宽度 */
+}
+
+.userprofile_right-column {
+    width: 80%; /* 左侧列宽度 */
+}
+
+.userprofile_select{
+    color: black;
+}
+
+.userprofile_unselect{
+    background-color: black;
+    color: white;
+}
