@@ -1,0 +1,48 @@
+.characterdetail_background {
+    background-image: url('../assets/background.jpg');
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px) contrast(0.2) brightness(1.7);
+    z-index: -1;
+}
+
+.characterdetail_header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    line-height: 100px;  /* 确保文字垂直居中 */
+    height: 100px;
+    width: 100%;  /* 确保横向拉伸 */
+    margin: 0;  /* 移除任何外边距 */
+}
+
+.characterdetail_outputarea {
+    height: 100%;
+    width: 50%; /* 表格宽度占满容器宽度 */
+    border-collapse: collapse; /* 边框合并为单一边框 */
+    text-align: center;
+    margin-left: auto; /* 将左边距设为自动 */
+    margin-right: auto; /* 将右边距设为自动 */
+}
+
+.characterdetail_image {
+    table-layout: fixed;
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.characterdetail_text {
+    text-align: center; /* 将文字水平居中 */
+}
+
+.characterdetail_textarea {
+    width: 25%; /* 数据列宽为表格宽度的30% */
+}
+
